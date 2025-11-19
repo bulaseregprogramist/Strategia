@@ -22,11 +22,19 @@ class StrategyMain {
 }
 
 class StrategySQLAlchemy {
-
+    + None create_table()
+    + None insert_in_table()
+    + None update_table()
 }
 
 class StrategyPause {
 
 }
+
+abstract Resources
+Resources --> Wood
+Resources --> Food
+Resources --> Iron
+
 Main --> MainMenu
 @enduml

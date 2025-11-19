@@ -14,3 +14,12 @@ def exit_game():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+
+
+def load_texture(filename: str,
+                size: tuple[int, int]) -> pygame.surface.Surface:
+    """Загрузка текстур"""
+    texture = pygame.transform.scale(
+        pygame.image.load(filename).convert_alpha(), size)
+    return texture
+

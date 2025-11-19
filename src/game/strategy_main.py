@@ -3,6 +3,7 @@
 """
 
 import pygame
+from src.anti_repeat import load_texture, exit_game
 
 
 pygame.init()
@@ -13,8 +14,17 @@ class StrategyMain:
     Главный класс игры-стратегии
     """
 
-    def __init__(self):
+    def __init__(self, screen: pygame.surface.Surface):
+        self.__screen = screen
         self.__play_music()
+        self.__wood = load_texture('textures/wood.png',
+                                    (65, 65))
+        self.__iron = load_texture('textures/iron.png',
+                                    (65, 65))
+        self.__food = load_texture('textures/food.png',
+                                    (65, 65))
+        self.__font1 = pygame.font.Font("textures/font1.otf", 20)
+        self.__counter1, self.__counter2, self.__counter3 = 0, 0, 0
         self.__run()
 
     def __play_music(self) -> None:
@@ -23,8 +33,32 @@ class StrategyMain:
         """
         music = pygame.mixer.Sound('textures/in_game.mp3')
         music.play(-1)
+    
+    def __initialize_text(self) -> None:
+        """Инициализация и вывод текста на экран"""
+        self.__text1 = self.__font1.render(f"{self.__counter1}",
+                                        1, (255, 255, 255))
+        self.__text2 = self.__font1.render(f"{self.__counter2}",
+                                        1, (255, 255, 255))
+        self.__text3 = self.__font1.render(f"{self.__counter3}",
+                                        1, (255, 255, 255))
+        
+        self.__screen.blit(self.__text1, (70, 1))
+        self.__screen.blit(self.__text2, (70, 70))
+        self.__screen.blit(self.__text3, (70, 140))
 
     def __run(self):
         """Основной метод класса."""
-        pass
+        game_cycle = 1
+        
+        while game_cycle:
+            self.__screen.fill((179, 208, 255))
+            self.__screen.blit(self.__food, (1, 1))
+            self.__screen.blit(self.__wood, (1, 70))
+            self.__screen.blit(self.__iron, (1, 140))
+            
+            self.__initialize_text()
+            exit_game()
+
+            pygame.display.flip()
 

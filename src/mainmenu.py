@@ -44,8 +44,8 @@ class MainMenu:
         """
         Проигрывание музыки в главном меню
         """
-        music = pygame.mixer.Sound('textures/in_menu.mp3')
-        music.play(-1)
+        self.__music = pygame.mixer.Sound('textures/in_menu.mp3')
+        self.__music.play(-1)
     
     def __exit_game(self) -> None:
         """
@@ -106,7 +106,8 @@ class MainMenu:
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
 
         if rect1.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            StrategyMain()
+            self.__music.stop()
+            StrategyMain(self.__screen)
         elif rect2.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
             Settings()
         elif rect3.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:

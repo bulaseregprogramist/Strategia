@@ -13,8 +13,8 @@ class Settings:
     Класс настроек игры
     """
 
-    def __init__(self):
-        self.__screen = pygame.display.set_mode((1200, 900))
+    def __init__(self, screen: pygame.surface.Surface):
+        self.__screen = screen
         self.run()
     
     def run(self) -> None:
