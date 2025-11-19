@@ -1,0 +1,32 @@
+@startuml "Strategy game"
+
+
+title "Игра-стратегия: полная схема программы"
+
+class Main
+
+class MainMenu {
+    - None play_music()
+    - None exit_game()
+    + None draw_menu()
+    + None menu_buttons()
+    - None run()
+}
+
+class Settings {
+
+}
+
+class StrategyMain {
+
+}
+
+class StrategySQLAlchemy {
+
+}
+
+class StrategyPause {
+
+}
+Main --> MainMenu
+@enduml
