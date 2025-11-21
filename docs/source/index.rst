@@ -18,6 +18,7 @@ documentation for details.
    mainmenu
    strategy_main
    strategy_sqlalchemy
-   strategy_main
+   strategy_pause
+   strategy_navigation
    settings
 

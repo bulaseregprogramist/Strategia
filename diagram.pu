@@ -31,10 +31,25 @@ class StrategyPause {
 
 }
 
+class StrategyNavigation {
+
+}
+
+class Restart {
+
+}
+
 abstract Resources
+
 Resources --> Wood
 Resources --> Food
 Resources --> Iron
 
+Restart --> MainMenu
 Main --> MainMenu
+
+StrategyMain <-- StrategyNavigation
+StrategyMain <-- StrategyPause
+StrategyMain <-- StrategySQLAlchemy
+
 @enduml

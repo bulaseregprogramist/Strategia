@@ -3,7 +3,7 @@
 """
 
 import pygame
-from src.anti_repeat import exit_game
+from src.anti_repeat import exit_game, load_texture
 
 
 pygame.init()
@@ -18,6 +18,7 @@ class StrategyPause:
         self.__screen = screen
         self.__font1 = pygame.font.Font("textures/font1.otf", 25)
         self.__text1 = self.__font1.render("ПАУЗА", 1, (255, 255, 255))
+        
         self.run()
 
     def run(self) -> None:

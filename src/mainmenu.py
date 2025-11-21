@@ -3,7 +3,7 @@
 """
 
 import pygame
-from src.anti_repeat import exit_game
+from src.anti_repeat import exit_game, load_texture
 from src.settings import Settings
 from src.game.strategy_main import StrategyMain
 from random import randint
@@ -31,6 +31,15 @@ class MainMenu:
         self.__text2 = self.__font2.render("ИГРАТЬ", 1, (255, 255, 255))
         self.__text3 = self.__font2.render("НАСТРОЙКИ", 1, (255, 255, 255))
         self.__text4 = self.__font2.render("ВЫХОД", 1, (255, 255, 255))
+        self.__text_author = self.__font2.render(
+            "@2025, Сергей Булатов (Sergey Projects)",
+            1, (255, 255, 255))
+        
+        self.__text5 = self.__font2.render("ИГРАТЬ", 1, (255, 234, 0))
+        self.__text6 = self.__font2.render("НАСТРОЙКИ", 1, (255, 234, 0))
+        self.__text7 = self.__font2.render("ВЫХОД", 1, (255, 234, 0))
+        
+        self.__reload = load_texture('textures/reload.png', (70, 70))
         
         self.__color1, self.__color2, self.__color3 = 0, 0, 0
         self.__counter = 0
@@ -66,6 +75,10 @@ class MainMenu:
         self.__screen.blit(self.__text2, (510, 200))
         self.__screen.blit(self.__text3, (510, 300))
         self.__screen.blit(self.__text4, (510, 400))
+        
+        self.__screen.blit(self.__text_author, (300, 830))
+        
+        self.__screen.blit(self.__reload, (10, 800))
 
         self.__counter += 1
         
@@ -98,6 +111,7 @@ class MainMenu:
         self.__screen.blit(square2, (510, 300))
         square3 = pygame.Surface((135, 40))
         self.__screen.blit(square3, (510, 400))
+        self.draw_menu()
 
         rect1 = square1.get_rect(topleft=(510, 200))
         rect2 = square2.get_rect(topleft=(510, 300))
@@ -105,13 +119,19 @@ class MainMenu:
 
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
 
-        if rect1.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            self.__music.stop()
-            StrategyMain(self.__screen)
-        elif rect2.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            Settings()
-        elif rect3.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
-            self.__exit_game()
+        if rect1.collidepoint(mouse_pos):
+            self.__screen.blit(self.__text5, (510, 200))
+            if pygame.mouse.get_pressed()[0]:
+                self.__music.stop()
+                StrategyMain(self.__screen)
+        elif rect2.collidepoint(mouse_pos):
+            self.__screen.blit(self.__text6, (510, 300))
+            if pygame.mouse.get_pressed()[0]:
+                Settings(self.__screen)
+        elif rect3.collidepoint(mouse_pos):
+            self.__screen.blit(self.__text7, (510, 400))
+            if pygame.mouse.get_pressed()[0]:
+                self.__exit_game()
 
     def __run(self):
         """Основная функция класса"""
@@ -119,7 +139,6 @@ class MainMenu:
         
         while cycle:
             self.menu_buttons()
-            self.draw_menu()
             exit_game()
 
             pygame.display.flip()

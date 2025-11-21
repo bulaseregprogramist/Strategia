@@ -1,14 +1,14 @@
 """
 Файл с абстрактным классом 
-про мини-игры
+про работников игрока
 """
 
 from abc import abstractmethod, ABC
 
 
-class Minigames(ABC):
+class Workers(ABC):
     """
-    Мини-игры игрока
+    Работники игрока
     """
     
     @abstractmethod
@@ -16,4 +16,3 @@ class Minigames(ABC):
         """
         """
         pass
-

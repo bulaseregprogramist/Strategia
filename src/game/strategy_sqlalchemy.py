@@ -51,3 +51,12 @@ class StrategySQLAlchemy:
         with Session() as session:
             session.commit()
 
+
+def main() -> None:
+    """Эта main-функция нужна, чтобы заполнить таблицу"""
+    ssqlalchemy = StrategySQLAlchemy()
+    ssqlalchemy.create_table()
+
+
+if __name__ == "__main__":
+    main()

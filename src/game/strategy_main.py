@@ -4,6 +4,11 @@
 
 import pygame
 from src.anti_repeat import load_texture, exit_game
+from src.game.strategy_navigation import StrategyNavigation
+from src.game.strategy_pause import StrategyPause
+from src.game.strategy_sqlalchemy import StrategySQLAlchemy
+from src.game.strategy_shop import StrategyShop
+from src.game.strategy_draw import StrategyDraw
 
 
 pygame.init()
@@ -17,12 +22,7 @@ class StrategyMain:
     def __init__(self, screen: pygame.surface.Surface):
         self.__screen = screen
         self.__play_music()
-        self.__wood = load_texture('textures/wood.png',
-                                    (65, 65))
-        self.__iron = load_texture('textures/iron.png',
-                                    (65, 65))
-        self.__food = load_texture('textures/food.png',
-                                    (65, 65))
+        self.__strategy_draw = StrategyDraw(self.__screen)
         self.__font1 = pygame.font.Font("textures/font1.otf", 20)
         self.__counter1, self.__counter2, self.__counter3 = 0, 0, 0
         self.__run()
@@ -53,9 +53,7 @@ class StrategyMain:
         
         while game_cycle:
             self.__screen.fill((179, 208, 255))
-            self.__screen.blit(self.__food, (1, 1))
-            self.__screen.blit(self.__wood, (1, 70))
-            self.__screen.blit(self.__iron, (1, 140))
+            self.__strategy_draw.draw_resources()
             
             self.__initialize_text()
             exit_game()

@@ -18,7 +18,15 @@ def exit_game():
 
 def load_texture(filename: str,
                 size: tuple[int, int]) -> pygame.surface.Surface:
-    """Загрузка текстур"""
+    """
+    Загрузка текстур
+    
+    Args:
+        filename (str): Путь к файлу
+        size (tuple[int, int]): Размер текстуры в игре
+    Returns:
+        pygame.surface.Surface: Загруженная в игру текстура.
+    """
     texture = pygame.transform.scale(
         pygame.image.load(filename).convert_alpha(), size)
     return texture
