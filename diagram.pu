@@ -40,6 +40,8 @@ class Restart {
 }
 
 abstract Resources
+abstract Buildings
+abstract MiniGames
 
 Resources --> Wood
 Resources --> Food
@@ -51,5 +53,7 @@ Main --> MainMenu
 StrategyMain <-- StrategyNavigation
 StrategyMain <-- StrategyPause
 StrategyMain <-- StrategySQLAlchemy
+StrategyMain <-- StrategyShop
+StrategyMain <-- StrategyDraw
 
 @enduml

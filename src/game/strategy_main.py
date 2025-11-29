@@ -25,6 +25,10 @@ class StrategyMain:
         self.__strategy_draw = StrategyDraw(self.__screen)
         self.__font1 = pygame.font.Font("textures/font1.otf", 20)
         self.__counter1, self.__counter2, self.__counter3 = 0, 0, 0
+        
+        self.__vault1 = 1
+        self.__vault2 = 1
+        self.__vault3 = 1
         self.__run()
 
     def __play_music(self) -> None:
@@ -34,14 +38,17 @@ class StrategyMain:
         music = pygame.mixer.Sound('textures/in_game.mp3')
         music.play(-1)
     
-    def __initialize_text(self) -> None:
+    def __update_text(self) -> None:
         """Инициализация и вывод текста на экран"""
-        self.__text1 = self.__font1.render(f"{self.__counter1}",
-                                        1, (255, 255, 255))
-        self.__text2 = self.__font1.render(f"{self.__counter2}",
-                                        1, (255, 255, 255))
-        self.__text3 = self.__font1.render(f"{self.__counter3}",
-                                        1, (255, 255, 255))
+        self.__text1 = self.__font1.render(
+            f"{self.__counter1}/{self.__vault1 * 1000}",
+                                1, (255, 255, 255))
+        self.__text2 = self.__font1.render(
+            f"{self.__counter2}/{self.__vault2 * 1000}",
+                                1, (255, 255, 255))
+        self.__text3 = self.__font1.render(
+            f"{self.__counter3}/{self.__vault3 * 1000}",
+                                1, (255, 255, 255))
         
         self.__screen.blit(self.__text1, (70, 1))
         self.__screen.blit(self.__text2, (70, 70))
@@ -53,9 +60,13 @@ class StrategyMain:
         
         while game_cycle:
             self.__screen.fill((179, 208, 255))
-            self.__strategy_draw.draw_resources()
             
-            self.__initialize_text()
+            self.__strategy_draw.draw_resources()
+            self.__strategy_draw.draw_buildings()
+            self.__strategy_draw.draw_buttons()
+            self.__strategy_draw.draw_minigames()
+            
+            self.__update_text()
             exit_game()
 
             pygame.display.flip()
