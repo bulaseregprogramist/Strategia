@@ -25,6 +25,7 @@ class StrategyPause:
         pause_cycle = 1
         
         while pause_cycle:
+            pygame.draw.rect(self.__screen, (255, 0, 0), (150, 0, 150, 800))
             self.__screen.blit(self.__text1, (50, 50))
 
             exit_game()

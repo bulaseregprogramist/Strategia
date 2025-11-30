@@ -16,9 +16,15 @@ documentation for details.
    :caption: Contents:
 
    mainmenu
+
    strategy_main
    strategy_sqlalchemy
    strategy_pause
    strategy_navigation
+   strategy_shop
+   strategy_draw
+   strategy_upgrade
+   
    settings
+   restart
 

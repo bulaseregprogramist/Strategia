@@ -15,4 +15,9 @@ class Restart:
     
     def __init__(self):
         pass
+    
+    def restart(self):
+        """
+        Основной метод класса: перезапуск игры
+        """
 

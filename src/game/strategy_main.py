@@ -8,7 +8,11 @@ from src.game.strategy_navigation import StrategyNavigation
 from src.game.strategy_pause import StrategyPause
 from src.game.strategy_sqlalchemy import StrategySQLAlchemy
 from src.game.strategy_shop import StrategyShop
+from src.game.strategy_rects import StrategyRects
 from src.game.strategy_draw import StrategyDraw
+from src.game.strategy_upgrade import StrategyUpgrade
+from keyboard import is_pressed
+from time import sleep
 
 
 pygame.init()
@@ -53,21 +57,45 @@ class StrategyMain:
         self.__screen.blit(self.__text1, (70, 1))
         self.__screen.blit(self.__text2, (70, 70))
         self.__screen.blit(self.__text3, (70, 140))
+    
+    def redirect(self, rect: pygame.rect.Rect,
+                rect2: pygame.rect.Rect) -> None:
+        """
+        Перенаправление игрока при нажатии кнопки
+        на другие страницы
+        
+        Args:
+            rect (pygame.rect.Rect): 'Квадрат' магазина,
+            rect2 (pygame.rect.Rect): 'Квадрат' улучшения
+        """
+        mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
+        
+        if (rect.collidepoint(mouse_pos)  # Магазин
+                and pygame.mouse.get_pressed()[0]):
+            StrategyShop(self.__screen)
+        elif (rect2.collidepoint(mouse_pos)  # Улучшения построек
+                and pygame.mouse.get_pressed()[0]):
+            StrategyUpgrade(self.__screen)
 
     def __run(self):
         """Основной метод класса."""
         game_cycle = 1
         
         while game_cycle:
-            self.__screen.fill((179, 208, 255))
+            self.__screen.fill((28, 194, 19))
             
             self.__strategy_draw.draw_resources()
             self.__strategy_draw.draw_buildings()
-            self.__strategy_draw.draw_buttons()
+            rect, rect2 = self.__strategy_draw.draw_buttons()
             self.__strategy_draw.draw_minigames()
             
             self.__update_text()
+            self.redirect(rect, rect2)
             exit_game()
+            
+            if is_pressed('esc'):
+                sleep(0.89109)
+                StrategyPause()
 
             pygame.display.flip()
 
